@@ -10,6 +10,9 @@ let app = express();
 app.set('port', (process.env.PORT || 8080));
 app.use(bodyParser.json({type: 'application/json'}));
 
+const GENERATE_ANSWER_ACTION = 'generate_answer';
+const CHECK_GUESS_ACTION = 'check_guess';
+
 app.post('/', function (request, response) {
   console.log('headers: ' + JSON.stringify(request.headers));
   console.log('body: ' + JSON.stringify(request.body));
