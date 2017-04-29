@@ -16,12 +16,31 @@ app.post('/', function (request, response) {
 
   const assistant = new Assistant({request: request, response: response});
   //response.sendStatus(200); // OK
-  function generateAnswer(assistant) {
-    console.log('check parameter');
-    let guess = parseInt(assistant.getArgument('check_guess'));
-    console.log(guess);
-}
   
+   function generateAnswer(assistant) {
+//     console.log('check parameter');
+//     let guess = parseInt(assistant.getArgument('check_guess'));
+//     console.log(guess);
+   }
+  
+   function checkGuess(assistant) {
+// 		  console.log('checkGuess');
+// 		  let answer = assistant.data.answer;
+// 		  let guess = parseInt(assistant.getArgument('guess')); //getArgument('state-of-component')
+// 		  if (answer > guess) {
+// 		   assistant.ask('It\'s higher than ' + guess + '. What\'s your next guess?');
+// 		  } else if (answer < guess) {
+// 		   assistant.ask('It\'s lower than ' + guess + '. Next guess?');
+// 		  } else {
+// 			assistant.tell('Congratulations, that\'s it! I was thinking of ' + answer);
+// 		  }
+ 	  }
+  //MAP ACTIONS to functions
+	  let actionMap = new Map();
+	  actionMap.set(GENERATE_ANSWER_ACTION, generateAnswer);
+	  actionMap.set(CHECK_GUESS_ACTION, checkGuess);
+
+	  assistant.handleRequest(actionMap);
 });
 
 // Start the server
