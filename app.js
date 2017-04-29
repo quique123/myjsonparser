@@ -22,22 +22,24 @@ app.post('/', function (request, response) {
   
    function generateAnswer(assistant) {
      console.log('checkea parameter');
+     // var answer = getRandomNumber(0, 100);
+     //	assistant.data.answer = answer;
      let guess = parseInt(assistant.getArgument('check_guess'));
      console.log(guess);
-       assistant.ask('I\'m thinking of a number from 0 and 100. What\'s your first guess?');
+     assistant.ask('I\'m thinking of a number from 0 and 100. What\'s your first guess?');
    }
   
    function checkGuess(assistant) {
-// 		  console.log('checkGuess');
-// 		  let answer = assistant.data.answer;
-// 		  let guess = parseInt(assistant.getArgument('guess')); //getArgument('state-of-component')
-// 		  if (answer > guess) {
-// 		   assistant.ask('It\'s higher than ' + guess + '. What\'s your next guess?');
-// 		  } else if (answer < guess) {
-// 		   assistant.ask('It\'s lower than ' + guess + '. Next guess?');
-// 		  } else {
-// 			assistant.tell('Congratulations, that\'s it! I was thinking of ' + answer);
-// 		  }
+		  console.log('checkGuess');
+		  let answer = assistant.data.answer;
+		  let guess = parseInt(assistant.getArgument('guess')); //getArgument('state-of-component')
+		  if (answer > guess) {
+		   assistant.ask('It\'s higher than ' + guess + '. What\'s your next guess?');
+		  } else if (answer < guess) {
+		   assistant.ask('It\'s lower than ' + guess + '. Next guess?');
+		  } else {
+			assistant.tell('Congratulations, that\'s it! I was thinking of ' + answer);
+		  }
  	  }
   //MAP ACTIONS to functions
 	  let actionMap = new Map();
