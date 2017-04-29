@@ -24,6 +24,7 @@ app.post('/', function (request, response) {
 //     console.log('check parameter');
 //     let guess = parseInt(assistant.getArgument('check_guess'));
 //     console.log(guess);
+       assistant.ask('I\'m thinking of a number from 0 and 100. What\'s your first guess?');
    }
   
    function checkGuess(assistant) {
