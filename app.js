@@ -122,7 +122,12 @@ app.get('/api/switches/:id', function(req, res){
   res.json(found);
 })
 
-// app.post('/api/switches/:id', function(req, res){
+// function getRandomNumber(min, max) {
+//   return Math.floor(Math.random() * (max - min + 1)) + min;
+// }
+// app.post('/', function (request, response) { //will cause issues
+
+app.post('/api/switches/:id', function(req, res){
 // 
 // ////////////////////////////////////////////////////////////////////MOD3
 //   console.log('headers: ' + JSON.stringify(request.headers));
@@ -157,32 +162,32 @@ app.get('/api/switches/:id', function(req, res){
 // 	  assistant.handleRequest(actionMap);
 // 
 // /////////////////////////////////////////////////////////////////////MOD3
-// 
-// // For now, uses a simple password query in the url string. 
-// // Example: POST to localhost:8000/API/switches/sw1?password=test
-//   if (req.query.password === process.env.PASS){
-//     var foundSwitch = getSwitch(req.params.id);
-//     
-//     // Optional On / Off command. If not included, defaults to a toggle.
-// 
-//     if(!(req.query.command === "on" || req.query.command === "off")){
-//       foundSwitch.toggle();
-// 	    //THIS IS THE IF TO BE MODIFIED TO if req.query.command === "on" then console.log("ON WAS PASSED IN"); 
-//     }
-//     else {
-//       foundSwitch.setState(req.query.command)
-//     }
-// 
-//     saveState();
-//     console.log("postSwitch "+JSON.stringify(foundSwitch));
-//     res.json(foundSwitch);
-//   }
-//   else {
-//     console.log("invalid password")
-//     res.send("try again")
-//   }
-//   
-// })
+
+// For now, uses a simple password query in the url string. 
+// Example: POST to localhost:8000/API/switches/sw1?password=test
+  if (req.query.password === process.env.PASS){
+    var foundSwitch = getSwitch(req.params.id);
+    
+    // Optional On / Off command. If not included, defaults to a toggle.
+
+    if(!(req.query.command === "on" || req.query.command === "off")){
+      foundSwitch.toggle();
+	    //THIS IS THE IF TO BE MODIFIED TO if req.query.command === "on" then console.log("ON WAS PASSED IN"); 
+    }
+    else {
+      foundSwitch.setState(req.query.command)
+    }
+
+    saveState();
+    console.log("postSwitch "+JSON.stringify(foundSwitch));
+    res.json(foundSwitch);
+  }
+  else {
+    console.log("invalid password")
+    res.send("try again")
+  }
+  
+})
 
 app.listen(process.env.PORT, function(){
  console.log('Listening on port ' + process.env.PORT);
