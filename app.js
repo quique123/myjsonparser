@@ -124,67 +124,67 @@ app.get('/api/switches/:id', function(req, res){
   res.json(found);
 })
 
-app.post('/api/switches/:id', function(req, res){
-
-////////////////////////////////////////////////////////////////////MOD3
-  console.log('headers: ' + JSON.stringify(request.headers));
-  console.log('body: ' + JSON.stringify(request.body));
-  const assistant = new Assistant({request: request, response: response});
-function generateAnswer(assistant) {
-     console.log('checkea parameter');
-     // var answer = getRandomNumber(0, 100);
-     //	assistant.data.answer = answer;
-     let guess = parseInt(assistant.getArgument('check_guess'));
-     console.log(guess);
-     assistant.ask('I\'m thinking of a number from 0 and 100. What\'s your first guess?');
-   }
-  
-   function checkGuess(assistant) {
-		  console.log('checkGuess');
-		  let answer = assistant.data.answer;
-		  let guess = parseInt(assistant.getArgument('guess')); //getArgument('state-of-component')
-		  if (answer > guess) {
-		   assistant.ask('It\'s higher than ' + guess + '. What\'s your next guess?');
-		  } else if (answer < guess) {
-		   assistant.ask('It\'s lower than ' + guess + '. Next guess?');
-		  } else {
-			assistant.tell('Congratulations, that\'s it! I was thinking of ' + answer);
-		  }
- 	  }
-  //MAP ACTIONS to functions
-	  let actionMap = new Map();
-	  actionMap.set(GENERATE_ANSWER_ACTION, generateAnswer);
-	  actionMap.set(CHECK_GUESS_ACTION, checkGuess);
-
-	  assistant.handleRequest(actionMap);
-
-/////////////////////////////////////////////////////////////////////MOD3
-
-// For now, uses a simple password query in the url string. 
-// Example: POST to localhost:8000/API/switches/sw1?password=test
-  if (req.query.password === process.env.PASS){
-    var foundSwitch = getSwitch(req.params.id);
-    
-    // Optional On / Off command. If not included, defaults to a toggle.
-
-    if(!(req.query.command === "on" || req.query.command === "off")){
-      foundSwitch.toggle();
-	    //THIS IS THE IF TO BE MODIFIED TO if req.query.command === "on" then console.log("ON WAS PASSED IN"); 
-    }
-    else {
-      foundSwitch.setState(req.query.command)
-    }
-
-    saveState();
-    console.log("postSwitch "+JSON.stringify(foundSwitch));
-    res.json(foundSwitch);
-  }
-  else {
-    console.log("invalid password")
-    res.send("try again")
-  }
-  
-})
+// app.post('/api/switches/:id', function(req, res){
+// 
+// ////////////////////////////////////////////////////////////////////MOD3
+//   console.log('headers: ' + JSON.stringify(request.headers));
+//   console.log('body: ' + JSON.stringify(request.body));
+//   const assistant = new Assistant({request: request, response: response});
+// function generateAnswer(assistant) {
+//      console.log('checkea parameter');
+//      // var answer = getRandomNumber(0, 100);
+//      //	assistant.data.answer = answer;
+//      let guess = parseInt(assistant.getArgument('check_guess'));
+//      console.log(guess);
+//      assistant.ask('I\'m thinking of a number from 0 and 100. What\'s your first guess?');
+//    }
+//   
+//    function checkGuess(assistant) {
+// 		  console.log('checkGuess');
+// 		  let answer = assistant.data.answer;
+// 		  let guess = parseInt(assistant.getArgument('guess')); //getArgument('state-of-component')
+// 		  if (answer > guess) {
+// 		   assistant.ask('It\'s higher than ' + guess + '. What\'s your next guess?');
+// 		  } else if (answer < guess) {
+// 		   assistant.ask('It\'s lower than ' + guess + '. Next guess?');
+// 		  } else {
+// 			assistant.tell('Congratulations, that\'s it! I was thinking of ' + answer);
+// 		  }
+//  	  }
+//   //MAP ACTIONS to functions
+// 	  let actionMap = new Map();
+// 	  actionMap.set(GENERATE_ANSWER_ACTION, generateAnswer);
+// 	  actionMap.set(CHECK_GUESS_ACTION, checkGuess);
+// 
+// 	  assistant.handleRequest(actionMap);
+// 
+// /////////////////////////////////////////////////////////////////////MOD3
+// 
+// // For now, uses a simple password query in the url string. 
+// // Example: POST to localhost:8000/API/switches/sw1?password=test
+//   if (req.query.password === process.env.PASS){
+//     var foundSwitch = getSwitch(req.params.id);
+//     
+//     // Optional On / Off command. If not included, defaults to a toggle.
+// 
+//     if(!(req.query.command === "on" || req.query.command === "off")){
+//       foundSwitch.toggle();
+// 	    //THIS IS THE IF TO BE MODIFIED TO if req.query.command === "on" then console.log("ON WAS PASSED IN"); 
+//     }
+//     else {
+//       foundSwitch.setState(req.query.command)
+//     }
+// 
+//     saveState();
+//     console.log("postSwitch "+JSON.stringify(foundSwitch));
+//     res.json(foundSwitch);
+//   }
+//   else {
+//     console.log("invalid password")
+//     res.send("try again")
+//   }
+//   
+// })
 
 app.listen(process.env.PORT, function(){
  console.log('Listening on port ' + process.env.PORT);
