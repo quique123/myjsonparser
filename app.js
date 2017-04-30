@@ -168,6 +168,7 @@ function generateAnswer(assistant) {
 
     if(!(req.query.command === "on" || req.query.command === "off")){
       foundSwitch.toggle();
+	    //THIS IS THE IF TO BE MODIFIED TO if req.query.command === "on" then console.log("ON WAS PASSED IN"); 
     }
     else {
       foundSwitch.setState(req.query.command)
