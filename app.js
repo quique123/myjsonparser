@@ -36,7 +36,7 @@ readableStream.on('data', function(chunk) {
 
 readableStream.on('end', function() {
   var parsed = JSON.parse(data);
-  for (i=0;i<parsed.switches.length;i++){
+  for (var i=0;i<parsed.switches.length;i++){
     switches.push(new Switch(parsed.switches[i]))
   }
 });
