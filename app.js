@@ -29,7 +29,6 @@ const switches = [];
 // Read state from saveState.json, populate switches array
 var readableStream = fs.createReadStream('saveState.json');
 var data = ''
-var int i = 0;
 
 readableStream.on('data', function(chunk) {
     data+=chunk;
@@ -37,7 +36,7 @@ readableStream.on('data', function(chunk) {
 
 readableStream.on('end', function() {
   var parsed = JSON.parse(data);
-
+  var int i = 0;
   for (i=0;i<parsed.switches.length;i++){
     switches.push(new Switch(parsed.switches[i]))
   }
