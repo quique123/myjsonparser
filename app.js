@@ -136,15 +136,14 @@ app.post('/api/switches/:id', function(req, res){
       console.log('genera answer');
       // var answer = getRandomNumber(0, 100);
       // assistant.data.answer = answer;
-      let guess = parseInt(assistant.getArgument('check_guess'));
-      console.log(guess);
+      //WRONGlet guess = parseInt(assistant.getArgument('check_guess'));
       assistant.ask('I\'m thinking of a number from 0 and 100. What\'s your first guess?');
    }
    
    function checkGuess(assistant) {
  	console.log('revisear guess');
 // 	let answer = assistant.data.answer;
- 	let guess = parseInt(assistant.getArgument('guess')); //getArgument('state-of-component')
+ 	let guess = parseInt(assistant.getArgument('check_guess')); //getArgument('state-of-component')
 	console.log(guess);
 // 	if (answer > guess) {
 // 	   assistant.ask('It\'s higher than ' + guess + '. What\'s your next guess?');
