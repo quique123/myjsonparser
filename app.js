@@ -132,7 +132,7 @@ app.post('/api/switches/:id', function(req, res){
 // ////////////////////////////////////////////////////////////////////MOD3
    console.log('headers: ' + JSON.stringify(req.headers));
    console.log('body: ' + JSON.stringify(req.body));
-   const assistant = new Assistant({request: request, response: response});
+   const assistant = new Assistant({request: req, response: res});
    function generateAnswer(assistant) {
       console.log('checkea parameter');
       // var answer = getRandomNumber(0, 100);
