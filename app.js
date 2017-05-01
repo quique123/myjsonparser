@@ -1,6 +1,4 @@
-////////////////////////////////////////////////////////MOD1
 'use strict';
-////////////////////////////////////////////////////////MOD1
 require('dotenv').config();
 
 const PythonShell = require('python-shell');
@@ -10,18 +8,16 @@ const bodyParser= require('body-parser');
 const path = require('path')
 const app = express();
 
-////////////////////////////////////////////////////////MOD2
 process.env.DEBUG = 'actions-on-google:*';
 let Assistant = require('actions-on-google').ApiAiAssistant;
-// let express = require('express');
-// let bodyParser = require('body-parser');
-// let app = express();
-// app.set('port', (process.env.PORT || 8080));
+//REMOVE let express = require('express');
+//REMOVE let bodyParser = require('body-parser');
+//REMOVE let app = express();
+//REMOVE app.set('port', (process.env.PORT || 8080));
 app.use(bodyParser.json({type: 'application/json'}));
 
 const GENERATE_ANSWER_ACTION = 'generate_answer';
 const CHECK_GUESS_ACTION = 'check_guess';
-////////////////////////////////////////////////////////MOD2
 
 // Switch states held in memory
 const switches = [];
@@ -45,7 +41,7 @@ readableStream.on('end', function() {
 
 
 // Switch Model
-// Expects an object:{
+// Expects an object:{ which is either passed inside of switchValues for existing or created with defaults using ||
   // id:"sw" + number,
   // state: "on" or "off",
   // name: any name you want to display. Defaults to "switch"
@@ -122,36 +118,31 @@ app.get('/api/switches/:id', function(req, res){
   res.json(found);
 })
 
-// function getRandomNumber(min, max) {
-//   return Math.floor(Math.random() * (max - min + 1)) + min;
-// }
 // app.post('/', function (request, response) { //will cause issues
 
 app.post('/api/switches/:id', function(req, res){
-// ////////////////////////////////////////////////////////////////////MOD3
    console.log('headers: ' + JSON.stringify(req.headers));
    console.log('body: ' + JSON.stringify(req.body));
    const assistant = new Assistant({request: req, response: res});
    function generateAnswer(assistant) {
       console.log('genera answer');
-      // var answer = getRandomNumber(0, 100);
-      // assistant.data.answer = answer;
-      //WRONGlet guess = parseInt(assistant.getArgument('check_guess'));
+//REMOVE    var answer = getRandomNumber(0, 100);
+//REMOVE    assistant.data.answer = answer;
       assistant.ask('I\'m thinking of a number from 0 and 100. What\'s your first guess?');
    }
    
    function checkGuess(assistant) {
  	console.log('revisear guess');
-// 	let answer = assistant.data.answer;
+//REMOVE 	let answer = assistant.data.answer;
  	let guess = parseInt(assistant.getArgument('check_guess')); //getArgument('state-of-component')
 	console.log(guess);
-// 	if (answer > guess) {
-// 	   assistant.ask('It\'s higher than ' + guess + '. What\'s your next guess?');
-//	} else if (answer < guess) {
-//  	   assistant.ask('It\'s lower than ' + guess + '. Next guess?');
-// 	} else {
-// 	   assistant.tell('Congratulations, that\'s it! I was thinking of ' + answer);
-// 	}
+//REMOVE 	if (answer > guess) {
+//REMOVE 	   assistant.ask('It\'s higher than ' + guess + '. What\'s your next guess?');
+//REMOVE	} else if (answer < guess) {
+//REMOVE  	   assistant.ask('It\'s lower than ' + guess + '. Next guess?');
+//REMOVE 	} else {
+//REMOVE 	   assistant.tell('Congratulations, that\'s it! I was thinking of ' + answer);
+//REMOVE 	}
     }
 //   //MAP ACTIONS to functions
  	  let actionMap = new Map();
@@ -159,19 +150,23 @@ app.post('/api/switches/:id', function(req, res){
  	  actionMap.set(CHECK_GUESS_ACTION, checkGuess);
  
  	  assistant.handleRequest(actionMap);
-// ////////////////////////////////////////////////////////////////////MOD3
-// For now, uses a simple password query in the url string. 
-// Example: POST to localhost:8000/API/switches/sw1?password=test
+
+// Simple password query in the url string. Ex: POST to localhost:8000/API/switches/sw1?password=test
   if (req.query.password === process.env.PASS){
     var foundSwitch = getSwitch(req.params.id);
-    
-    // Optional On / Off command. If not included, defaults to a toggle.
 
+// THIS CODE WILL REPLACE THE foundSwitch.toggle() BELOW
+//	if (guess === 99) {
+//		foundSwitch.setState("on");
+//	} else {
+//		foundSwitch.setState("off");
+//	}
+// THIS CODE WILL REPLACE THE foundSwitch.toggle() BELOW
+	  
     if(!(req.query.command === "on" || req.query.command === "off")){
       foundSwitch.toggle();
 	    //THIS IS THE IF TO BE MODIFIED TO if req.query.command === "on" then console.log("ON WAS PASSED IN"); 
-    }
-    else {
+    } else {
       foundSwitch.setState(req.query.command)
     }
 
