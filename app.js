@@ -143,9 +143,9 @@ app.post('/api/switches/:id', function(req, res){
    
    function checkGuess(assistant) {
  	console.log('revisear guess');
- 	let answer = assistant.data.answer;
-	console.log(answer);
-// 	let guess = parseInt(assistant.getArgument('guess')); //getArgument('state-of-component')
+// 	let answer = assistant.data.answer;
+ 	let guess = parseInt(assistant.getArgument('guess')); //getArgument('state-of-component')
+	console.log(guess);
 // 	if (answer > guess) {
 // 	   assistant.ask('It\'s higher than ' + guess + '. What\'s your next guess?');
 //	} else if (answer < guess) {
