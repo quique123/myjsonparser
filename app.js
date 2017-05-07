@@ -133,16 +133,13 @@ app.post('/api/switches/:id', function(req, res){
    
    function checkGuess(assistant) {
  	console.log('revisear guess');
-//REMOVE 	let answer = assistant.data.answer;
  	let guess = parseInt(assistant.getArgument('check_guess')); //getArgument('state-of-component')
 	console.log(guess);
-//REMOVE 	if (answer > guess) {
-//REMOVE 	   assistant.ask('It\'s higher than ' + guess + '. What\'s your next guess?');
-//REMOVE	} else if (answer < guess) {
-//REMOVE  	   assistant.ask('It\'s lower than ' + guess + '. Next guess?');
-//REMOVE 	} else {
-//REMOVE 	   assistant.tell('Congratulations, that\'s it! I was thinking of ' + answer);
-//REMOVE 	}
+ 	if (guess === 65) {
+ 	   console.log('SUCCESS guess=65');
+ 	} else {
+ 	   assistant.tell('FAILURE Nothing yet');
+ 	}
     }
 //   //MAP ACTIONS to functions
  	  let actionMap = new Map();
