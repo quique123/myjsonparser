@@ -61,6 +61,7 @@ function Switch(switchValues){
   }
   this.setState = function(state){
     var str = state === "on" ? onString(this.id[2]) : offString(this.id[2]);
+    console.log(str);//ADDING NEW COMPONENTS...ADDING NEW COMPONENTS
     PythonShell.run(str, function (err) {
       if (!process.env.DEV){
         if (err) throw err;
@@ -123,6 +124,8 @@ app.get('/api/switches/:id', function(req, res){
 app.post('/api/switches/:id', function(req, res){
    console.log('headers: ' + JSON.stringify(req.headers));
    console.log('body: ' + JSON.stringify(req.body));
+   console.log('params: ' + JSON.stringify(req.params));//ADDING NEW COMPONENTS...ADDING NEW COMPONENTS
+
    const assistant = new Assistant({request: req, response: res});
    function generateAnswer(assistant) {
       console.log('genera answer');
@@ -151,6 +154,7 @@ app.post('/api/switches/:id', function(req, res){
 // Simple password query in the url string. Ex: POST to localhost:8000/API/switches/sw1?password=test
   if (req.query.password === process.env.PASS){
     var foundSwitch = getSwitch(req.params.id);
+    console.log(foundSwitch);//ADDING NEW COMPONENTS...ADDING NEW COMPONENTS
 
 // THIS CODE WILL REPLACE THE foundSwitch.toggle() BELOW
 //	if (guess === 99) {
