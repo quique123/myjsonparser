@@ -61,6 +61,7 @@ function Switch(switchValues){
   }
   this.setState = function(state){
     var str = state === "on" ? onString(this.id[2]) : offString(this.id[2]);
+    console.log('setStateFunction');
     console.log(str);//ADDING NEW COMPONENTS...ADDING NEW COMPONENTS
     PythonShell.run(str, function (err) {
       if (!process.env.DEV){
@@ -154,6 +155,7 @@ app.post('/api/switches/:id', function(req, res){
 // Simple password query in the url string. Ex: POST to localhost:8000/API/switches/sw1?password=test
   if (req.query.password === process.env.PASS){
     var foundSwitch = getSwitch(req.params.id);
+    console.log('theFoundSwitchIs: ');
     console.log(foundSwitch);//ADDING NEW COMPONENTS...ADDING NEW COMPONENTS
 
 // THIS CODE WILL REPLACE THE foundSwitch.toggle() BELOW
