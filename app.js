@@ -59,10 +59,27 @@ function Switch(switchValues){
       this.setState("on");
     }
   }
+//   this.setState = function(state,component){
+//   var compNumberId = 0;
+//   switch(component) {
+//     case "lights":
+//         compNumberId = 1;
+//         break;
+//     case "patio-lights":
+//         compNumberId = 2;
+//         break;
+//     case "water":
+//	   compNumberId = 3;
+//	   break;
+//     default:
+//         console.log('Sorry, no component specified');
+//	   Call assistant.ask('which component, which state');
+//    }
+// var str = state === "on" ? onString(compNumberId) : offString(compNumberId);
   this.setState = function(state){
     var str = state === "on" ? onString(this.id[2]) : offString(this.id[2]);
     console.log('setStateFunction');
-    console.log(str);//ADDING NEW COMPONENTS...ADDING NEW COMPONENTS
+    console.log(str);//ADDING NEW COMPONENTS...ADDING NEW COMPONENTS logs=./public/python/sw1_off.py
     PythonShell.run(str, function (err) {
       if (!process.env.DEV){
         if (err) throw err;
@@ -125,7 +142,7 @@ app.get('/api/switches/:id', function(req, res){
 app.post('/api/switches/:id', function(req, res){
    console.log('headers: ' + JSON.stringify(req.headers));
    console.log('body: ' + JSON.stringify(req.body));
-   console.log('params: ' + JSON.stringify(req.params));//ADDING NEW COMPONENTS...ADDING NEW COMPONENTS
+   console.log('params: ' + JSON.stringify(req.params));//ADDING NEW COMPONENTS...ADDING NEW COMPONENTS logs =params: {"id":"sw1"}
 
    const assistant = new Assistant({request: req, response: res});
    function generateAnswer(assistant) {
@@ -156,7 +173,13 @@ app.post('/api/switches/:id', function(req, res){
   if (req.query.password === process.env.PASS){
     var foundSwitch = getSwitch(req.params.id);
     console.log('theFoundSwitchIs: ');
-    console.log(foundSwitch);//ADDING NEW COMPONENTS...ADDING NEW COMPONENTS
+    console.log(foundSwitch);//ADDING NEW COMPONENTS...ADDING NEW COMPONENTS logs=
+//Switch {
+//id: 'sw1',
+//state: 'off',
+//name: 'Koko\'s Lamp',
+//toggle: [Function],
+//setState: [Function] }
 
 // THIS CODE WILL REPLACE THE foundSwitch.toggle() BELOW
 //	if (guess === 99) {
@@ -170,6 +193,7 @@ app.post('/api/switches/:id', function(req, res){
       foundSwitch.toggle();
 	    //THIS IS THE IF TO BE MODIFIED TO if req.query.command === "on" then console.log("ON WAS PASSED IN"); 
     } else {
+      // foundSwitch.setState(soc,comp)
       foundSwitch.setState(req.query.command)
     }
 
